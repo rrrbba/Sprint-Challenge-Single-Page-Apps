@@ -18,7 +18,7 @@ export default function CharacterCard(props) {
     <div>
        <StyledCard>
          <img src={props.character.image} alt = 'character '/>
-      <h1>Name: {props.character.name}</h1>
+      <h1>{props.character.name}</h1>
       <p>Gender: {props.character.gender}</p>
       </StyledCard>
     </div>
