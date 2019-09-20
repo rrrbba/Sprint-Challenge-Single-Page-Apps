@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 // import { Card } from 'reactstrap';
 import styled from "styled-components";
-import { Route } from "react-router-dom";
-import { withFormik, Form } from "formik";
+import { NavLink } from "react-router-dom";
+import SearchForm from './SearchForm';
+
 
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
   const [characters, setCharacters] = useState([])
-
+  const [searchCharacters, setSearchCharacters] = useState ([])
 
 
 
@@ -35,7 +36,7 @@ export default function CharacterList() {
 
   return (
     <section className="character-list">
-      {/* <h2>TODO: `array.map()` over your state here!</h2> */}
+      
       {characters.map(character => (
         <CharacterDetails key = {character.id} character={character} />
       ))}
@@ -48,15 +49,19 @@ function CharacterDetails({character}) {
   const { name, gender } = character;
 
   return(
-    // <Link to = {`/characters/${character.id}`}>
-      
+    <>
+      <SearchForm  />
+     <div>
       <StyledCard>
   
       <StyledName>Name: {name}</StyledName>
       <StyledGender>Gender: {gender}</StyledGender>
-      </StyledCard>
-    // </Link>
+   
 
+      </StyledCard>
+      </div>
+
+</>
     
   )
 
@@ -81,8 +86,3 @@ const StyledCard = styled.div`
 `
 
 
-const FormikCharacterList = withFormik ({
-
-  
-
-})
