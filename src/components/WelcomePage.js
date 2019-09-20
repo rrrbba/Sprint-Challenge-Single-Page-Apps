@@ -1,20 +1,18 @@
 import React from "react";
-// import CharacterList from './components/CharacterList';
-import { NavLink } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 
 
 
 export default function WelcomePage(props) {
 
-  const routeToCharacters = event => {
-    event.preventDefault();
-    props.history.push("/characters")
-  }
 
   return (
     <section className="welcome-page">
       <header>
-      <NavLink to="/characters">Characters</NavLink>
+      <Link to="/characters">
+        <button>Characters</button>
+        </Link>
         <h1>Welcome to the ultimate fan site!</h1>
         
         <img

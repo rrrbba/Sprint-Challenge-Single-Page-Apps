@@ -1,53 +1,52 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-
-export default function SearchForm({characters, setSearchResults}) {
-  
-  const [searchWord, setSearchWord] = useState('')
+// import styled from "styled-components";
 
 
- 
 
- 
-  useEffect(() => {
-    const results = characters.filter(character => character.name.toLowerCase().includes(searchWord))
 
-      searchWord === ''
-      ? setSearchResults(characters)
-      : setSearchResults(results)
-
-  }, [searchWord])
-
+export default function SearchForm(props) {
+  // console.log(props.characters);
+  const characterNames = props.characters.map(character => character.name);
+  // console.log(characterNames);
+  const [ searchTerm, setSearchTerm ] = useState("");
+  const [ searchResults, setSearchResults ] = useState([]);
   const handleChange = (event) => {
-    event.preventDefault();
-    setSearchWord(event.target.value)
+    setSearchTerm(event.target.value);
   }
+  useEffect(() => {
+      const results = characterNames.filter(name => {
+        return name.toLowerCase().includes(searchTerm);
+      })
+      setSearchResults(results);
+  }, [searchTerm])
+
+
+
+
+
+
 
   return (
-    <section className="search-form">
-      
-      <form>
-      <Searcher
-        name = "search"
-        type = "text"
-        placeholder = "Search Characters"
-        value = {searchWord}
-        onChange = {handleChange}
-
-
+    
+    <form  className="search-form">
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={handleChange}
       />
-      <input 
-      onClick = 'submit'
-      type = 'submit'
-      value = "Search"
-      />
-      </form>
-
-
-    </section>
+      <button type = "submit">Search</button>
+    <ul>
+ 
+    
+      {searchResults.map(item => {
+        return (
+          <div key={item}>
+            <li>{item}</li>
+          </div>
+        )
+      })}
+    </ul>  
+    </form>
   );
 }
-
- const Searcher = styled.input`
-  border: 1px solid black
- `
